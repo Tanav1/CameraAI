@@ -1,13 +1,14 @@
 import os
 import streamlit as st
-from tensorflow.keras.models import load_model
+import tensorflow as tf
+from tensorflow import keras
 import keras.utils as image
 import numpy as np
 
 from streamlit_extras.let_it_rain import rain
 
 # Load the pre-trained model
-model = load_model('m2.h5', compile=False)
+model = tf.keras.models.load_model('m2.h5', compile=False)
 
 # Streamlit app
 st.title('Image Classification App :camera_with_flash: :frame_with_picture:')
@@ -57,4 +58,3 @@ if uploaded_file is not None:
             st.balloons()
         
 
-        
