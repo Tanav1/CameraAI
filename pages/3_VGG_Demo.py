@@ -7,6 +7,8 @@ import numpy as np
 
 from streamlit_extras.let_it_rain import rain
 
+from gradCAM import GradCAM
+
 # Load the pre-trained model
 model = tf.keras.models.load_model('vggmodel.h5', compile=False)
 
@@ -37,21 +39,23 @@ if uploaded_file is not None:
 
     # Make predictions
     predictions = model.predict(img_array)
-    redicted_class = np.argmax(predictions)
+    predicted_class = np.argmax(predictions)
 
-    binary_predictions = (predictions > 0.5).astype(int)
+    binary_predictions = (predictions < 0.5).astype(int)
 
-    print("Model predictions:", redicted_class, predictions)
-
+    print("Model predictions:", predicted_class, predictions, binary_predictions)
     
     if st.button('Predict!'):
         predicted = model.predict(img_array)
         #st.success('The image is predicted to be: {}'.format(predicted))
         st.subheader('Prediction:')
-        if redicted_class == 0:
+        if binary_predictions == 0:
             st.error('This image is predicted to be FAKE.')
             #st.caption('The model is', predictions*100, ' sure that this image is FAKE.')
             rain(emoji='🤖', font_size=65, falling_speed=5)
         else:
             st.success('This image is predicted to be REAL.')
             st.balloons()
+        # show grad cam
+        cam = GradCAM('vggmodel.h5', uploaded_file, model_id=3)
+        st.image(cam.gradCAM, caption="Grad-CAM heatmap of image regions that impacted model's predictions")
