@@ -67,11 +67,12 @@ if uploaded_file is not None:
         #st.success('The image is predicted to be: {}'.format(predicted))
         st.subheader('Prediction:')
         if y_classes == 1:
-            st.error('This image is predicted to be FAKE.')
-            rain(emoji='🤖', font_size=65, falling_speed=5)
-        else:
             st.success('This image is predicted to be REAL.')
             st.balloons()
+        else:
+            st.error('This image is predicted to be FAKE.')
+            rain(emoji='🤖', font_size=65, falling_speed=5)
+            
 
     # remove file that was created
     os.remove("uploaded_file.jpg")
