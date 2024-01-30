@@ -13,7 +13,7 @@ from streamlit_extras.let_it_rain import rain
 model = tf.keras.models.load_model('CIFAKE-2-(32 X 32)- 97.59.h5', compile=False)
 
 # Streamlit app
-st.title('Efficientnet Model Demo :camera_with_flash: :frame_with_picture:')
+st.title('Efficientnet Model Demo TEST :camera_with_flash: :frame_with_picture:')
 st.subheader('Women in AI Incubator Cohort 7 - Team Camera AI', divider='rainbow')
 
 # File upload
