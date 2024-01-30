@@ -4,8 +4,6 @@ import tensorflow as tf
 from tensorflow import keras
 import keras.utils as image
 import numpy as np
-import pandas as pd
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from streamlit_extras.let_it_rain import rain
 
@@ -32,23 +30,17 @@ if uploaded_file is not None:
     st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
 
     # Preprocess the uploaded image
-    ### 999 for label should not matter
-    gen=ImageDataGenerator()
-    img_size=(32,32)
-    bs=1
-
-    df = pd.DataFrame([[f"{uploaded_file}", '999']], columns=['filepaths', 'labels'])
-    small_df = gen.flow_from_dataframe(df,
-                        x_col='filepaths',
-                        y_col='labels',
-                        target_size=img_size,
-                        class_mode= 'categorical',
-                        color_mode='rgb',
-                        shuffle=False,
-                        batch_size=bs)
+    img = image.load_img(uploaded_file, target_size=(32, 32))
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0
 
     # Make predictions
-    y_prob = model.predict(small_df) 
+    predictions = model.predict(img_array)
+    #binary_predictions = (predictions > 0.5).astype(int)
+    #binary_predictions
+
+    y_prob = model.predict(img_array) 
     y_classes = y_prob.argmax(axis=-1)
 
     #predictors = predictor(model, img_array)
@@ -58,7 +50,7 @@ if uploaded_file is not None:
 
     
     if st.button('Predict!'):
-        predicted = model.predict(small_df)
+        predicted = model.predict(img_array)
         #st.success('The image is predicted to be: {}'.format(predicted))
         st.subheader('Prediction:')
         if y_classes == 1:
