@@ -51,7 +51,7 @@ if uploaded_file is not None:
         st.subheader('Prediction:')
         if binary_predictions == 0:
             st.error('This image is predicted to be FAKE.')
-            rain(emoji='🤖', font_size=65, falling_speed=5)
+            #rain(emoji='🤖', font_size=65, falling_speed=5)
         else:
             st.success('This image is predicted to be REAL.')
             st.balloons()
