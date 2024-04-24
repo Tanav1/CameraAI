@@ -14,7 +14,7 @@ model = tf.keras.models.load_model('m2.h5', compile=False)
 
 # Streamlit app
 st.title('Base Model Demo :camera_with_flash: :frame_with_picture:')
-st.subheader('Women in AI Incubator Cohort 7 - Team Camera AI', divider='rainbow')
+st.subheader('WAI Incubator Cohort 7 - Team Camera AI', divider='rainbow')
 
 # File upload
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
