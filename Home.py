@@ -3,7 +3,7 @@ import keras.utils as image
 
 # Streamlit app
 st.title('Image Classification App :camera_with_flash: :frame_with_picture:')
-st.subheader('Women in AI Incubator Cohort 7 - Team Camera AI', divider='rainbow')
+st.subheader('WAI Incubator Cohort 7 - Team Camera AI', divider='rainbow')
 
 st.image('Blog.jpg.webp')
 
