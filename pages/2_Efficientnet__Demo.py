@@ -71,7 +71,7 @@ if uploaded_file is not None:
             st.balloons()
         else:
             st.error('This image is predicted to be FAKE.')
-            rain(emoji='🤖', font_size=65, falling_speed=5)
+            #rain(emoji='🤖', font_size=65, falling_speed=5)
             
 
     # remove file that was created
